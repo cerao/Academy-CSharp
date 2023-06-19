@@ -1,38 +1,36 @@
-﻿
 
-
-FillArray();
-
-
-
-
-
-char[] FillArray()
+Console.WriteLine("Input size of CHAR array");
+int Size;
+bool CheckElement;
+    
+CheckElement = int.TryParse(Console.ReadLine(), out Size);
+if (!CheckElement || Size <= 0)
 {
-    Console.WriteLine("Enter size of CHAR array");
-    int size = int.Parse(Console.ReadLine());
+    Console.WriteLine("size equal only 1.2.3.4....");
+    return;
+}
+
+char[] CharArr = FillArray(Size);
 
 
-    var CharArr = new char[size];
 
-    Console.WriteLine("Enter " + size + " symbol");
-    string symbol = Console.ReadLine();
+Console.WriteLine("Input symbol you want to search in array");
+char Symbol = Convert.ToChar(Console.ReadLine()!);
 
-    for (var i = 0; i < size; i++)
+int Count =  SearchSymbol(CharArr, Symbol);
+CountSymbol(Count, Symbol);
+
+
+char[] FillArray(int Size)
+{
+    var CharArr = new char[Size];
+
+    Console.WriteLine("Input " + Size + " symbol");
+    for (var i = 0; i < Size; i++)
     {
-        CharArr[i] = symbol[i];
+        Console.Write("input {0}: ", i + 1);
+        CharArr[i] = Convert.ToChar(Console.ReadLine()!);
     }
-
-    for (var i = 0; i < size; i++)
-        Console.WriteLine("CharArr[" + i + "] = " + CharArr[i]);
-
-
-    Console.WriteLine("Enter symbol you want to search in array");
-    string SearchSymbolST = Console.ReadLine();
-    char SearchSymbo = SearchSymbolST[0];
-
-    SearchSymbol(CharArr, SearchSymbo);
-
     return CharArr;
 }
 
@@ -44,8 +42,6 @@ int SearchSymbol(char[] CharArr, char Symbol)
         if (c == Symbol)
             Count++;
     }
-
-    CountSymbol(Count, Symbol);
     return Count;
 }
 
